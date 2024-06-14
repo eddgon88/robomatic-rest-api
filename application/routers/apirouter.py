@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from typing import Optional
 from pydantic import BaseModel
-from services.consumeService import Consumer
+from ..services.consumeService import Consumer
 
 class RequestParams(BaseModel):
     method: str
@@ -10,7 +10,7 @@ class RequestParams(BaseModel):
     headers: Optional[dict] = None
     body: Optional[str] = None
 
-router = APIRouter(prefix="/rest-api/vi")
+router = APIRouter(prefix="/rest-api/v1")
 
 @router.post("/consume", status_code=200)
 def consume(params: RequestParams):
