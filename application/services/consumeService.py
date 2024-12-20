@@ -1,5 +1,6 @@
 import requests
 from xml.dom import minidom
+import json
 
 
 class Consumer:
@@ -22,17 +23,17 @@ def consumeRest(params):
         if params['method'] == 'GET':            
             return restResponseMapper(requests.get(params['url'], headers=params['headers']))            
         elif params['method'] == 'POST':
-            return restResponseMapper(requests.post(params['url'], headers=params['headers'], data=params['body']))
+            return restResponseMapper(requests.post(params['url'], headers=params['headers'], json=params['body']))
         elif params['method'] == 'PUT':
-            return restResponseMapper(requests.put(params['url'], headers=params['headers'], data=params['body']))
+            return restResponseMapper(requests.put(params['url'], headers=params['headers'], json=params['body']))
         elif params['method'] == 'PATCH':
-            return restResponseMapper(requests.patch(params['url'], headers=params['headers'], data=params['body']))
+            return restResponseMapper(requests.patch(params['url'], headers=params['headers'], json=params['body']))
         elif params['method'] == 'DELETE':
-            return restResponseMapper(requests.delete(params['url'], headers=params['headers'], data=params['body']))
+            return restResponseMapper(requests.delete(params['url'], headers=params['headers'], json=params['body']))
         elif params['method'] == 'HEAD':
-            return restResponseMapper(requests.head(params['url'], headers=params['headers'], data=params['body']))
+            return restResponseMapper(requests.head(params['url'], headers=params['headers'], json=params['body']))
         elif params['method'] == 'OPTIONS':
-            return restResponseMapper(requests.options(params['url'], headers=params['headers'], data=params['body']))
+            return restResponseMapper(requests.options(params['url'], headers=params['headers'], json=params['body']))
     except Exception as e:
         return e
 
@@ -52,6 +53,7 @@ def consumeGraphql(params):
     return restResponseMapper(requests.post(params['url'], headers=params['headers'], json={"query": params['body']}))
 
 def restResponseMapper(httpResponse):
+    print(str(httpResponse))
     return {
         'status_code' : httpResponse.status_code,
         'headers' : httpResponse.headers,

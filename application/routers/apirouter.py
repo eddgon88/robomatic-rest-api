@@ -8,7 +8,7 @@ class RequestParams(BaseModel):
     service_type: str
     url: str
     headers: Optional[dict] = None
-    body: Optional[str] = None
+    body: Optional[dict] = None
 
 router = APIRouter(prefix="/rest-api/v1")
 
